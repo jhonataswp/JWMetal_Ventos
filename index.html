@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1f4a72">
+    <meta name="description" content="JW Metálica — Módulo Cálculo de Vento. Memorial e coeficientes de vento conforme ABNT NBR 6123:2023.">
+    <title>JW Metálica — Módulo Cálculo de Vento</title>
+    <link rel="icon" href="./assets/logo-jw.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body data-theme="light">
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="i-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5M9 9h.01M15 9h.01M9 13h.01M15 13h.01"/></symbol>
+        <symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+        <symbol id="i-wind" viewBox="0 0 24 24"><path d="M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7a2.5 2.5 0 1 1-2.5 2.5"/></symbol>
+        <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3 17 17 3l4 4L7 21l-4-4z"/><path d="m7 13 2 2m2-6 2 2m2-6 2 2"/></symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+        <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m0 0 4 4m-4-4L8 8"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></symbol>
+        <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v12m0 0 4-4m-4 4-4-4"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+        <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.1 2.1-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21h-3v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1-2.1-2.1.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H3v-3h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 2.1-2.1.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.6V3h3v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1 2.1 2.1-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.1v3h-.1a1.7 1.7 0 0 0-1.6 1z"/></symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01M10.3 3.9 2.6 17a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></symbol>
+        <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+        <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></symbol>
+        <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/></symbol>
+        <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13M9 7V4h6v3"/></symbol>
+        <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-.9.7-1.7 1.2-1.7 2.7M12 17h.01"/></symbol>
+        <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></symbol>
+        <symbol id="i-save" viewBox="0 0 24 24"><path d="M5 3h11l3 3v15H5V3z"/><path d="M8 3v6h7V3M8 21v-7h8v7"/></symbol>
+        <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></symbol>
+        <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
+      </defs>
+    </svg>
+
+    <div class="app-shell">
+      <header class="app-header" aria-label="Barra de ferramentas principal">
+        <div class="brand-block">
+          <button class="nav-toggle icon-btn" id="nav-toggle" type="button" title="Abrir navegador de etapas" aria-label="Abrir navegador de etapas">
+            <svg class="icon"><use href="#i-menu"></use></svg>
+          </button>
+          <a class="brand" href="#" aria-label="JW Metálica — Módulo Cálculo de Vento — início">
+            <span class="brand-logo-wrap"><img src="./assets/logo-jw.svg" alt="" class="brand-logo"></span>
+            <span class="brand-text">
+              <strong>JW METÁLICA</strong>
+              <small>Módulo Cálculo de Vento</small>
+            </span>
+          </a>
+        </div>
+
+        <div class="project-breadcrumb" aria-label="Obra ativa">
+          <span class="crumb-label">Obra ativa</span>
+          <strong id="project-name">Edificação sem título</strong>
+          <span class="crumb-sep">·</span>
+          <span class="crumb-code" id="project-code">R00</span>
+        </div>
+
+        <div class="header-actions">
+          <div class="unit-controls" aria-label="Unidades do projeto">
+            <div class="unit-set" aria-label="Unidade de comprimento">
+              <button type="button" data-unit-kind="length" data-unit-value="m" class="selected" title="Metros">m</button>
+              <button type="button" data-unit-kind="length" data-unit-value="cm" title="Centímetros">cm</button>
+              <button type="button" data-unit-kind="length" data-unit-value="mm" title="Milímetros">mm</button>
+            </div>
+            <div class="unit-set" aria-label="Unidade de pressão">
+              <button type="button" data-unit-kind="pressure" data-unit-value="kN/m²" class="selected" title="Quilonewton por metro quadrado">kN/m²</button>
+              <button type="button" data-unit-kind="pressure" data-unit-value="kgf/m²" title="Quilograma-força por metro quadrado">kgf/m²</button>
+              <button type="button" data-unit-kind="pressure" data-unit-value="N/m²" title="Newton por metro quadrado">N/m²</button>
+            </div>
+          </div>
+
+          <div class="ribbon" role="toolbar" aria-label="Ações do projeto">
+            <button class="btn btn-ghost" id="new-project-button" type="button" title="Novo projeto">
+              <svg class="icon"><use href="#i-plus"></use></svg><span class="btn-label">Novo projeto</span>
+            </button>
+            <button class="btn btn-ghost" id="import-button" type="button" title="Importar projeto .vjw">
+              <svg class="icon"><use href="#i-upload"></use></svg><span class="btn-label">Importar</span>
+            </button>
+            <input id="import-file" type="file" accept=".vjw,application/json" hidden>
+            <button class="btn btn-ghost" id="export-button" type="button" title="Exportar projeto .vjw">
+              <svg class="icon"><use href="#i-download"></use></svg><span class="btn-label">Salvar .vjw</span>
+            </button>
+            <button class="btn btn-ghost" id="reset-button" type="button" title="Resetar parâmetros de cálculo">
+              <svg class="icon"><use href="#i-refresh"></use></svg><span class="btn-label">Resetar</span>
+            </button>
+            <button class="btn btn-primary" id="memorial-button" type="button" title="Gerar memorial descritivo">
+              <svg class="icon"><use href="#i-file"></use></svg><span class="btn-label">Memorial</span>
+            </button>
+            <button class="btn btn-ghost btn-icon-only" id="settings-button" type="button" title="Configurações" aria-label="Configurações">
+              <svg class="icon"><use href="#i-settings"></use></svg>
+            </button>
+            <button class="btn btn-ghost btn-icon-only" id="help-button" type="button" title="Ajuda" aria-label="Ajuda">
+              <svg class="icon"><use href="#i-help"></use></svg>
+            </button>
+          </div>
+
+          <button class="icon-btn theme-toggle" id="theme-toggle" type="button" title="Alternar tema claro/escuro" aria-label="Alternar tema claro/escuro">
+            <svg class="icon theme-icon-light"><use href="#i-moon"></use></svg>
+            <svg class="icon theme-icon-dark"><use href="#i-sun"></use></svg>
+          </button>
+          <button class="icon-btn inspector-toggle" id="inspector-toggle" type="button" title="Abrir inspetor de resultados" aria-label="Abrir inspetor de resultados">
+            <svg class="icon"><use href="#i-panel"></use></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="app-body">
+        <aside class="side-nav" id="side-nav" aria-label="Navegador de etapas">
+          <div class="project-card">
+            <span class="project-card-icon"><svg class="icon"><use href="#i-building"></use></svg></span>
+            <span class="project-card-copy">
+              <strong id="project-card-name">Edificação sem título</strong>
+              <small id="project-card-client">Cliente não informado</small>
+            </span>
+            <button class="project-card-edit" id="edit-project-button" type="button" title="Editar dados da obra" aria-label="Editar dados da obra">
+              <svg class="icon"><use href="#i-settings"></use></svg>
+            </button>
+          </div>
+
+          <div class="nav-progress" aria-label="Progresso do preenchimento">
+            <div class="progress-copy"><span id="progress-title">0 de 6 etapas completas</span><strong id="progress-percent">0%</strong></div>
+            <div class="progress-track"><div id="progress-bar"></div></div>
+          </div>
+
+          <div class="side-label">Fluxo do cálculo</div>
+          <nav id="step-nav" class="step-nav" aria-label="Etapas do cálculo"></nav>
+
+          <div class="nav-footer">
+            <button class="norm-link" id="norm-summary-button" type="button">
+              <svg class="icon"><use href="#i-info"></use></svg>
+              <span><strong>ABNT NBR 6123:2023</strong><small>Notas e tabelas normativas</small></span>
+            </button>
+            <div class="nav-meta">
+              <span class="status-dot"></span>
+              <span>Dados processados localmente</span>
+            </div>
+          </div>
+        </aside>
+
+        <main class="main-area" id="main-area">
+          <div class="workspace">
+            <section class="editor-column" aria-label="Área de edição">
+              <header class="step-header">
+                <div class="step-kicker" id="step-kicker">Etapa 01 · Obra e cliente</div>
+                <h1 id="step-title">Dados da Obra e Cliente</h1>
+                <p id="step-description">Identifique o empreendimento e o responsável técnico do memorial.</p>
+              </header>
+
+              <section id="step-content" class="step-content" aria-live="polite"></section>
+
+              <footer class="editor-footer">
+                <button id="back-button" type="button" class="btn btn-ghost">
+                  <svg class="icon"><use href="#i-chevron"></use></svg><span>Voltar</span>
+                </button>
+                <div class="editor-footer-right">
+                  <span id="footer-hint">Os dados são processados localmente neste navegador.</span>
+                  <button id="next-button" type="button" class="btn btn-primary"><span>Continuar</span><svg class="icon"><use href="#i-chevron"></use></svg></button>
+                </div>
+              </footer>
+            </section>
+
+            <aside class="viewer-column" aria-label="Vista 3D e coeficientes">
+              <section class="viewer-card">
+                <div class="viewer-head">
+                  <div class="viewer-title">
+                    <span class="panel-kicker">Vista 3D</span>
+                    <strong id="model-kind">Duas águas</strong>
+                  </div>
+                  <div class="viewer-tools">
+                    <span class="viewer-hint">Arraste para girar</span>
+                    <button class="icon-btn icon-btn-sm" id="reset-view-button" type="button" title="Restaurar ângulo da vista" aria-label="Restaurar ângulo da vista">
+                      <svg class="icon"><use href="#i-refresh"></use></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="model-stage">
+                  <svg id="wind-model" viewBox="0 0 520 400" role="img" aria-label="Modelo tridimensional da edificação"><g id="model-layer"></g><g id="wind-layer"></g></svg>
+                </div>
+                <div class="color-scale"><span>− sucção</span><i></i><span>+ sobrepressão</span></div>
+                <div class="live-summary" aria-label="Resumo ao vivo">
+                  <div><span>Vk</span><strong id="live-vk">—</strong></div>
+                  <div><span>q</span><strong id="live-q">—</strong></div>
+                  <div><span>α</span><strong id="live-alpha">—</strong></div>
+                  <div><span>Cpi</span><strong id="live-cpi">—</strong></div>
+                </div>
+              </section>
+
+              <section class="viewer-card chart-card" id="zone-chart-card">
+                <div class="viewer-head">
+                  <div class="viewer-title">
+                    <span class="panel-kicker">Coeficientes</span>
+                    <strong>Cp por zona</strong>
+                  </div>
+                  <span class="chip" id="zone-chart-direction">90°</span>
+                </div>
+                <div id="zone-chart" class="zone-chart"></div>
+              </section>
+            </aside>
+          </div>
+        </main>
+
+        <aside class="inspector" id="inspector" aria-label="Inspetor de resultados">
+          <div class="inspector-head">
+            <div>
+              <span class="panel-kicker">Tempo real</span>
+              <h2>Inspetor de resultados</h2>
+            </div>
+            <button class="icon-btn icon-btn-sm inspector-close" id="inspector-close" type="button" title="Fechar inspetor" aria-label="Fechar inspetor">
+              <svg class="icon"><use href="#i-close"></use></svg>
+            </button>
+          </div>
+          <div class="inspector-body" id="inspector-body"></div>
+        </aside>
+      </div>
+
+      <footer class="status-bar" aria-label="Barra de status">
+        <div class="status-left">
+          <span class="status-dot"></span>
+          <span id="status-text">Cálculo atualizado</span>
+          <span class="status-sep">·</span>
+          <span>ABNT NBR 6123:2023</span>
+        </div>
+        <div class="status-mid" id="status-file">sem-titulo.vjw</div>
+        <div class="status-right">
+          <span id="status-warnings">Sem avisos normativos</span>
+          <span class="status-sep">·</span>
+          <span id="status-autosave">Salvo localmente</span>
+          <span class="status-version">v2.0.0</span>
+        </div>
+      </footer>
+    </div>
+
+    <div class="drawer-overlay" id="drawer-overlay" hidden></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <dialog id="project-dialog" class="modal">
+      <form id="project-form" method="dialog" novalidate>
+        <header class="modal-head">
+          <div>
+            <span class="panel-kicker" id="project-dialog-kicker">Projeto</span>
+            <h2 id="project-dialog-title">Novo projeto</h2>
+          </div>
+          <button type="button" class="icon-btn" data-close-dialog="project-dialog" title="Fechar" aria-label="Fechar">
+            <svg class="icon"><use href="#i-close"></use></svg>
+          </button>
+        </header>
+        <div class="modal-body">
+          <div class="field-grid two">
+            <div class="field"><label for="np-project">Nome da obra / empreendimento <span class="required">*</span></label><div class="control-wrap"><input id="np-project" type="text" placeholder="Ex.: Galpão industrial — Unidade Sul"></div></div>
+            <div class="field"><label for="np-client">Cliente</label><div class="control-wrap"><input id="np-client" type="text" placeholder="Razão social do cliente"></div></div>
+            <div class="field"><label for="np-address">Endereço / Cidade-UF</label><div class="control-wrap"><input id="np-address" type="text" placeholder="Rua, número, cidade — UF"></div></div>
+            <div class="field"><label for="np-responsible">Responsável técnico</label><div class="control-wrap"><input id="np-responsible" type="text" placeholder="Engenheiro responsável"></div></div>
+            <div class="field"><label for="np-crea">CREA</label><div class="control-wrap"><input id="np-crea" type="text" placeholder="Número do registro"></div></div>
+            <div class="field"><label for="np-date">Data</label><div class="control-wrap"><input id="np-date" type="date"></div></div>
+            <div class="field"><label for="np-code">Código do projeto</label><div class="control-wrap"><input id="np-code" type="text" placeholder="Ex.: JW-2026-014"></div></div>
+            <div class="field"><label for="np-revision">Revisão</label><div class="control-wrap"><input id="np-revision" type="text" placeholder="R00"></div></div>
+          </div>
+          <label class="check-row" id="np-clear-row">
+            <input id="np-clear" type="checkbox" checked>
+            <span><strong>Limpar parâmetros e cálculos anteriores</strong><small>Mantém apenas os dados cadastrais informados neste formulário. Será solicitada confirmação.</small></span>
+          </label>
+        </div>
+        <footer class="modal-foot">
+          <button type="button" class="btn btn-ghost" data-close-dialog="project-dialog">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="np-submit">Criar projeto</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <dialog id="settings-dialog" class="modal">
+      <form method="dialog">
+        <header class="modal-head">
+          <div><span class="panel-kicker">Preferências</span><h2>Configurações</h2></div>
+          <button type="button" class="icon-btn" data-close-dialog="settings-dialog" title="Fechar" aria-label="Fechar"><svg class="icon"><use href="#i-close"></use></svg></button>
+        </header>
+        <div class="modal-body settings-body">
+          <section class="settings-section">
+            <h3>Aparência</h3>
+            <div class="segmented" id="setting-theme">
+              <label><input type="radio" name="setting-theme" value="light"><span><svg class="icon"><use href="#i-sun"></use></svg> Tema claro técnico</span></label>
+              <label><input type="radio" name="setting-theme" value="dark"><span><svg class="icon"><use href="#i-moon"></use></svg> Tema escuro</span></label>
+            </div>
+          </section>
+          <section class="settings-section">
+            <h3>Unidades</h3>
+            <div class="field-grid two">
+              <div class="field"><label>Comprimento</label><div class="segmented compact" id="setting-length">
+                <label><input type="radio" name="setting-length" value="m"><span>m</span></label>
+                <label><input type="radio" name="setting-length" value="cm"><span>cm</span></label>
+                <label><input type="radio" name="setting-length" value="mm"><span>mm</span></label>
+              </div></div>
+              <div class="field"><label>Pressão</label><div class="segmented compact" id="setting-pressure">
+                <label><input type="radio" name="setting-pressure" value="kN/m²"><span>kN/m²</span></label>
+                <label><input type="radio" name="setting-pressure" value="kgf/m²"><span>kgf/m²</span></label>
+                <label><input type="radio" name="setting-pressure" value="N/m²"><span>N/m²</span></label>
+              </div></div>
+            </div>
+          </section>
+          <section class="settings-section">
+            <h3>Interface</h3>
+            <label class="check-row"><input id="setting-show-norm" type="checkbox"><span><strong>Exibir referência normativa nas etapas</strong><small>Mostra as notas e tabelas da NBR 6123 ao final de cada etapa.</small></span></label>
+          </section>
+          <section class="settings-section about-block">
+            <h3>Sobre</h3>
+            <p><strong>JW Metálica — Módulo Cálculo de Vento</strong><br>Versão 2.0.0 · ABNT NBR 6123:2023</p>
+            <p class="hint">Atalhos: Ctrl+S exporta .vjw · Ctrl+O importa .vjw · Esc fecha janelas. Os cálculos são processados localmente e o rascunho é salvo no navegador.</p>
+          </section>
+        </div>
+        <footer class="modal-foot"><button type="button" class="btn btn-primary" data-close-dialog="settings-dialog">Fechar</button></footer>
+      </form>
+    </dialog>
+
+    <dialog id="confirm-dialog" class="modal modal-sm">
+      <header class="modal-head">
+        <div><span class="panel-kicker">Confirmação</span><h2 id="confirm-title">Confirmar ação</h2></div>
+        <button type="button" class="icon-btn" id="confirm-x" title="Fechar" aria-label="Fechar"><svg class="icon"><use href="#i-close"></use></svg></button>
+      </header>
+      <div class="modal-body"><p id="confirm-message" class="confirm-message"></p></div>
+      <footer class="modal-foot">
+        <button type="button" class="btn btn-ghost" id="confirm-cancel">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="confirm-ok">Confirmar</button>
+      </footer>
+    </dialog>
+
+    <dialog id="help-dialog" class="modal">
+      <header class="modal-head">
+        <div><span class="panel-kicker">Guia rápido</span><h2>Ajuda</h2></div>
+        <button type="button" class="icon-btn" data-close-dialog="help-dialog" title="Fechar" aria-label="Fechar"><svg class="icon"><use href="#i-close"></use></svg></button>
+      </header>
+      <div class="modal-body help-body">
+        <div class="help-grid">
+          <section><h3>1 · Obra e localização</h3><p>Cadastre a obra, o cliente e o responsável técnico. Na etapa de localização, digite o município e confirme o V₀ sugerido pela base local contra a isopleta da NBR 6123.</p></section>
+          <section><h3>2 · Fatores S₁, S₂ e S₃</h3><p>S₁ depende da topografia; S₂ da categoria, classe e altura; S₃ do grupo de utilização. O inspetor à direita atualiza Vk e q em tempo real.</p></section>
+          <section><h3>3 · Geometria</h3><p>Escolha a cobertura (duas águas, uma água ou abóbada) e informe vão, comprimento, pé-direito e inclinação/flecha. A vista 3D acompanha cada alteração.</p></section>
+          <section><h3>4 · Cpe, Cpi e Ca</h3><p>Revise as zonas de pressão externa, descreva as aberturas para o Cpi e consulte a nota sobre Ca. Coeficientes editáveis são sinalizados no memorial.</p></section>
+          <section><h3>5 · Resultados</h3><p>Consulte as pressões por zona, as combinações de vento a 90° e 0° e gere o memorial descritivo em PDF pela janela de impressão.</p></section>
+          <section><h3>Arquivos .vjw</h3><p>O botão Salvar .vjw exporta todos os dados da obra em JSON com extensão .vjw. Importar restaura obra, parâmetros, vista 3D e resultados.</p></section>
+        </div>
+        <p class="hint">Os resultados são apoio ao projeto. Valide hipóteses e coeficientes com profissional habilitado antes de aplicar as cargas.</p>
+      </div>
+      <footer class="modal-foot"><button type="button" class="btn btn-primary" data-close-dialog="help-dialog">Entendi</button></footer>
+    </dialog>
+
+    <dialog id="memorial-dialog" class="modal modal-wide memorial-dialog">
+      <header class="modal-head">
+        <div><span class="panel-kicker">Documento técnico</span><h2>Memorial descritivo — ação do vento</h2></div>
+        <div class="modal-head-actions">
+          <button type="button" class="btn btn-primary" id="print-memorial-button"><svg class="icon"><use href="#i-print"></use></svg><span>Imprimir / Salvar PDF</span></button>
+          <button type="button" class="icon-btn" data-close-dialog="memorial-dialog" title="Fechar" aria-label="Fechar"><svg class="icon"><use href="#i-close"></use></svg></button>
+        </div>
+      </header>
+      <div class="modal-body memorial-preview" id="memorial-preview"></div>
+    </dialog>
+
+    <section id="memorial-print" class="memorial-print" aria-hidden="true"></section>
+
+    <datalist id="city-options"></datalist>
+
+    <script src="./normas.js"></script>
+    <script src="./wind-engine.js"></script>
+    <script src="./js/core.js"></script>
+    <script src="./js/steps.js"></script>
+    <script src="./js/project.js"></script>
+    <script src="./js/memorial.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

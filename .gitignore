@@ -1,0 +1,39 @@
+# --- Dependências ---
+node_modules/
+jspm_packages/
+.pnp/
+.yarn/
+
+# --- Artefatos de análise que não fazem parte do app ---
+# Evidências geradas pelo REA (~15 MB) e relatórios locais
+rea-evidence.json
+*.rea-evidence.json
+rea-*.json
+!package.json
+
+# --- Repositório Git aninhado (rascunho antigo) ---
+# Se quiser versionar esse conteúdo, mova os arquivos para a raiz.
+JWMetal_Ventos/
+
+# --- Projetos exportados pela aplicação ---
+# Contêm dados de obra/cliente; não versionar
+*.vjw
+
+# --- Sistema operacional e editores ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Logs e caches ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.eslintcache
+.cache/
+.tmp/

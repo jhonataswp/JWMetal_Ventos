@@ -1,0 +1,21 @@
+{
+  "name": "jw-metalica-vento",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Calculadora da ação do vento em edificações conforme ABNT NBR 6123:2023",
+  "keywords": [
+    "nbr-6123",
+    "vento",
+    "engenharia-estrutural",
+    "calculo-estrutural"
+  ],
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.cjs",
+    "dev": "node server.cjs",
+    "test": "node --test tests/wind-engine.test.cjs"
+  }
+}

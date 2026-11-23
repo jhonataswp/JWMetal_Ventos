@@ -1,0 +1,21 @@
+# Normaliza o texto para LF no repositório; o checkout segue o padrão do SO.
+* text=auto eol=lf
+
+*.html text
+*.css  text
+*.js   text
+*.cjs  text
+*.md   text
+*.svg  text
+*.tsv  text
+*.json text
+
+# Binários: nunca normalizar
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.pdf  binary
+*.zip  binary
